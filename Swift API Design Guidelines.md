@@ -64,11 +64,15 @@
 
 8. Name methods based on their side effects
    - Functions without side effects or have return value should read as noun phrases
-     x.distance(to: y), i.successor()
+     
+      x.distance(to: y), i.successor()
    - But functions with side effects should read as imperative verb pharese
-     friends.reverse()
+     
+      friends.reverse()
    - Mutating, nonmutating
+      
      Mutating methods have imperative verb forms.
+     
      Nonmutating methods is applied by “ed”/“ing” rule
 
      
