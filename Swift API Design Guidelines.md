@@ -152,18 +152,20 @@
      
     values.append([2, 3, 4]) // [1, “a”, [2, 3, 4]] or [1, “a”, 2, 3, 4]
       
-    struct Array {
-        /// Inserts ‘newElement’ at ‘self.endIdnex’
-        public mutating func append(newElement: Element)
-              
-        /// Inserts the contents of ‘newElements’, in order, at
-        /// ‘self.endIndex’.
-        public mutating func append<S : SequenceType where S.Generator.Element == Element>(contentsOf newElements: S)
-      }
-     
-       ——> 
+    
+    	struct Array {
+    	
+        	/// Inserts ‘newElement’ at ‘self.endIdnex’
+    		public mutating func append(newElement: Element)
+        
+    		/// Inserts the contents of ‘newElements’, in order, at
+    		/// ‘self.endIndex’.
+    		public mutating func append<S : SequenceType where S.Generator.Element == Element>(contentsOf newElements: S)
+    	} 
+      
+     ——> 
 
-      So, [1, “a”, 2, 3, 4]
+     So, [1, “a”, 2, 3, 4]
 
 “Renaming”
 1. Use @objc to convert a Swifty function to an ObjC method
