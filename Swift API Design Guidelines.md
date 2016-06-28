@@ -88,6 +88,7 @@
         documentDirectory.appednPathComponent(“.list”) // mutating
       
         let documentFile = documentDirectory.appedingPathComponent(“.list) // non-mutating
+        // to use "appeded", it needs to be changed like "appended to something", so it needs to be applied by ing-rule
 
 9. Use #selector & #keyPath
 
