@@ -153,7 +153,7 @@
        
        extension CGContext { func fillPath() }
 
-      e.g. context.fillPath()
+       e.g. context.fillPath()
 
     - Computed Properties
        CFStringRef ArtistGetName(ArtistRef) NS_SWIFT_NAME(getter:Artist.name(self:));
@@ -163,22 +163,22 @@
        
        extension Artist { var name: CSTring { get set } }
 
-      e.g. let formerName = myArtist.name
+       e.g. let formerName = myArtist.name
              myArtist.name = “Ƭ̵̬̊” // The Artist Formerly Known as Prince
 
 5. Together
     typedef NSString * NSCalendarIdentifier NS_EXTENSIBLE_STRING_ENUM NS_SWIFT_NAME(Calendar.Identifier) ;
     NSCalendarIdentifier NSClaendarIdentifierGregorian;
     
-=>
+    =>
 
     struct Calendar.Identifier : RawRepresentable {
     	init(_ rawValue: String)
         var rawValue: String { get }
         static let gregorian: Calendar.Identifier
-   }
+    }
    
-   e.g. let cal = NSCalendar(identifier: .gregorian)
+     e.g. let cal = NSCalendar(identifier: .gregorian)
 
      
 
