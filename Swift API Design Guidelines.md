@@ -24,8 +24,10 @@
 
 3. First argument should read grammatically
   - Prepositional phrase
+    
     truck.removeBoxes(withLabel: "WWDC 2016")
   - To make part of a grammatical phrase
+    
     viewController.dismiss(true) => viewController.dismiss(animated: true)
   - Otherwise, don't use a first argument label
 
@@ -33,12 +35,20 @@
   
    var string = "Hello" => var greeting = "Hello"
   
-   func restock(from widgetFactory: WidgetFactory) => func restock(from supplier: WidgetFactory)
+   func restock(from widgetFactory: WidgetFactory) 
+
+   => 
+   
+   func restock(from supplier: WidgetFactory)
 
 5. NSObject, Any, AnyObject or a fundamental type could give us weak type information.
    To be clarity, A parameter has such a weak type information should have a noun describing its role.
   
-   func add(observer: NSObject, for keyPath: String) => func addObserver(_ observer: NSObject, forKeyPath path: String)
+   func add(observer: NSObject, for keyPath: String) 
+ 
+   => 
+
+   func addObserver(_ observer: NSObject, forKeyPath path: String)
 
 6. Factory method begins its name with "make"
 
