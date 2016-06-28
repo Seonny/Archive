@@ -167,7 +167,9 @@
 
      So, [1, “a”, 2, 3, 4]
 
+
 “Renaming”
+
 1. Use @objc to convert a Swifty function to an ObjC method
 
 2. New NS_SWIFT_NAME supports argument labeling
