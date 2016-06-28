@@ -1,3 +1,5 @@
+// https://swift.org/documentation/api-design-guidelines/
+
 “Feel Swifty"
 
 "Clarity is more important than brevity"
