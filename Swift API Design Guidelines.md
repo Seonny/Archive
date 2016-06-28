@@ -127,7 +127,9 @@
 
 17. Take advantage of defaulted parameters.
      
-    e.g. func compare(other: String) -> Ordering
+    e.g. 
+
+         func compare(other: String) -> Ordering
         
          func compare(other: String, options: CompareOptions) -> Odering  
 	
