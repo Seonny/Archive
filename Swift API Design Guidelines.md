@@ -237,10 +237,11 @@
        
        => 
        
-       extension Artist { var name: CSTring { get set } }
+       extension Artist { var name: CFString { get set } }
 
        e.g. let formerName = myArtist.name
-             myArtist.name = “Ƭ̵̬̊” // The Artist Formerly Known as Prince
+             
+            myArtist.name = “Ƭ̵̬̊” // The Artist Formerly Known as Prince
 
 5. Together
     
