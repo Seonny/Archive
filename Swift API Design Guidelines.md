@@ -59,6 +59,8 @@
    => 
    
    Color(red: 32...): Colro red 32
+   
+   This rleates to "18.Arguments Labels, Full-width type conversion"
 
 8. Name methods based on their side effects
    - Functions without side effects or have return value should read as noun phrases
