@@ -141,11 +141,12 @@
        - Omit all labels when arguments can not be usefully distinguished.
           e.g. min(number 1, number 2)
        - Full-width type conversion: omit the 1st argument label e.g. Int64(someUInt32)
+         
          narrowing type conversion: describe the narrowing is recommended by label. e.g. UInt32(truncating: someUInt64)
 
 19. Label closure parameters and tuple members
 
-20. Take care with unconstrained polymorphism: Anu,AnyObject and unconstrained generic parameters
+20. Take care with unconstrained polymorphism: Any, AnyObject and unconstrained generic parameters
       
     var values: [Any] = [1, “a”]
      
