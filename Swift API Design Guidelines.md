@@ -188,11 +188,13 @@
    
    =>
     
-   struct NSCalednarIdentifier : RawRepresentable {
-    	init(_ rawValue: String)
-        var rawValue: String { get }
-        static let gregorian: NSCalendarIdentifier
-   }
+	   struct NSCalednarIdentifier : RawRepresentable {
+	    	
+		init(_ rawValue: String)
+		var rawValue: String { get }
+		static let gregorian: NSCalendarIdentifier
+
+   	   }
    
    e.g. let cal = NSCalendar(identifier: .gregorian)
 
@@ -248,10 +250,10 @@
     
     =>
 
-    struct Calendar.Identifier : RawRepresentable {
-    	init(_ rawValue: String)
-        var rawValue: String { get }
-        static let gregorian: Calendar.Identifier
-    }
+    	struct Calendar.Identifier : RawRepresentable {
+    		init(_ rawValue: String)
+        	var rawValue: String { get }
+        	static let gregorian: Calendar.Identifier
+    	}
    
      e.g. let cal = NSCalendar(identifier: .gregorian)
