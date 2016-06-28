@@ -1,5 +1,7 @@
 “Feel Swifty"
+
 "Clarity is more important than brevity"
+
 "APIs have to be read grammatically"
 
 1. Omit needless words.
@@ -106,42 +108,60 @@
 
 2. New NS_SWIFT_NAME supports argument labeling
   - (NSLayoutConstraint *)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor NS_SWIFT_NAME(constraint(equalTo:));
-  => fun constraint(equalTo: NSLayoutAnchor) -> NSLayoutConstraint
+  
+  => 
+  
+  func constraint(equalTo: NSLayoutAnchor) -> NSLayoutConstraint
 
 3. NS_EXTENSIBLE_STRING_ENUM
    typedef NSString * NSCalendarIdentifier NS_EXTENSIBLE_STRING_ENUM;
    NSCalendarIdentifier NSClaendarIdentifierGregorian;
+   
    =>
-    struct NSCalednarIdentifier : RawRepresentable {
+    
+   struct NSCalednarIdentifier : RawRepresentable {
     	init(_ rawValue: String)
         var rawValue: String { get }
         static let gregorian: NSCalendarIdentifier
    }
+   
    e.g. let cal = NSCalendar(identifier: .gregorian)
 
 4. C API
     - Properties
        CFStringRef kCGColorWhite NS_SWIFT_NAME(CGColor.white);
-       => extension CGColor { static let white: CFString }
+       
+       => 
+
+       extension CGColor { static let white: CFString }
 
        e.g. let color = CGColor.white
 
     - Initializers
       CGAffineTransform CGAffineTransformMakeTranslation(CGFloat tx, CGFloat ty) NS_SWIFT_NAME(CGAffineTransform.init(translationX:y:));
-      => extension CGAffineTransform { init(translationX: CGFloat, y: CGFloat) }
+      
+      => 
+      
+      extension CGAffineTransform { init(translationX: CGFloat, y: CGFloat) }
 
       e.g. let translate = CGAffineTransform(translationX: 1.0, y: 0.5)
 
     - Methods
        void CGContextFillPath(CGContextRef) NS_SWIFT_NAME(CGContext.fillPaht(self));
-       => extension CGContext { func fillPath() }
+       
+       => 
+       
+       extension CGContext { func fillPath() }
 
       e.g. context.fillPath()
 
     - Computed Properties
        CFStringRef ArtistGetName(ArtistRef) NS_SWIFT_NAME(getter:Artist.name(self:));
        void ArtistSetName(ArtistRef, CFStringRef) NS_SWIFT_NAME(setter:Artist.name(self:newValue:));
-       => extension Artist { var name: CSTring { get set } }
+       
+       => 
+       
+       extension Artist { var name: CSTring { get set } }
 
       e.g. let formerName = myArtist.name
              myArtist.name = “Ƭ̵̬̊” // The Artist Formerly Known as Prince
@@ -149,12 +169,15 @@
 5. Together
     typedef NSString * NSCalendarIdentifier NS_EXTENSIBLE_STRING_ENUM NS_SWIFT_NAME(Calendar.Identifier) ;
     NSCalendarIdentifier NSClaendarIdentifierGregorian;
-    =>
+    
+=>
+
     struct Calendar.Identifier : RawRepresentable {
     	init(_ rawValue: String)
         var rawValue: String { get }
         static let gregorian: Calendar.Identifier
    }
+   
    e.g. let cal = NSCalendar(identifier: .gregorian)
 
      
