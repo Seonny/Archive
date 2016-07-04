@@ -27,8 +27,11 @@
 # Generic constraints are secondary to function signature
 
 # Warn unused results
+
   @discardableResult // The side effect is first. Return value is a secondary thing.
+
   func plusOne (_ a: Int) -> Int {
+
      print(a) // side effect
      return a + 1
   
