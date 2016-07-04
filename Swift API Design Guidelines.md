@@ -42,6 +42,14 @@
   - IUO becomes a strong optional if that will work
   - It is only forced if necessary to type check
   
+# Floating Point
+  - Provides IEEE-754 properties and operations
+  - FloatigPointProtocol
+    e.g. Not M_PI but Float.pi, CGFloat.pi
+
+# Whole Module Optimization
+  - First compliation will be slow. However it will get faster with caching optimization and compliation
+
 # Omit needless words.
   
   allViews.removeElement(cancelButton) => allViews.remove(cancelButton)
