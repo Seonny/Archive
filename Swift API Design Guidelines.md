@@ -6,6 +6,42 @@
 
 ## "APIs have to be read grammatically"
 
+# Generics
+  A number of frameworks like auto layout and core data support fully general generics
+  
+  { 
+    
+     let request = NSFetchRequest(entityName: "Animal")
+   
+     guard let searchResults = try? context.executeFetchRequest(request) as! [Animal] ...
+  }
+   
+   => 
+   
+  {
+    
+     let request : NSFetchRequest<Animal> = Animal.fetchRequest 
+     guard let searchResults = try? context.fetch(request) ...
+  }
+   
+# Generic constraints are secondary to function signature
+
+# Warn unused results
+  @discardableResult // The side effect is first. Return value is a secondary thing.
+  func plusOne (_ a: Int) -> Int {
+     print(a) // side effect
+     return a + 1
+  
+  }
+  plusOne(x) // warning will be occured
+  _ = plusOne(x) // In case of just using a side effect
+  
+# Unsafe pointer can't be nil, use optional
+  
+# Implicitly Unwrapped Optional
+  - IUO becomes a strong optional if that will work
+  - It is only forced if necessary to type check
+  
 # Omit needless words.
   
   allViews.removeElement(cancelButton) => allViews.remove(cancelButton)
