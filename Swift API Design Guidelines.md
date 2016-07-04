@@ -36,7 +36,9 @@
      return a + 1
   
   }
+  
   plusOne(x) // warning will be occured
+  
   _ = plusOne(x) // In case of just using a side effect
   
 # Unsafe pointer can't be nil, use optional
