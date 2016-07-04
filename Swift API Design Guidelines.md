@@ -306,4 +306,4 @@
         	static let gregorian: Calendar.Identifier
     	}
    
-     e.g. let cal = NSCalendar(identifier: .gregorian)
+     e.g. let cal = NSCalendar(identifier: Calendar.Identifier.gregorian)
