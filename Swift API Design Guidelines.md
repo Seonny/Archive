@@ -115,17 +115,13 @@
    * Mutating, nonmutating
      * Mutating methods have imperative verb forms.
      * Nonmutating methods is applied by “ed”/“ing” rule
-       * “ed” rule
-```
-        x.reverse() // mutating
-        let y = x.reversed() // non-mutating
-```
-       * “ing” rule: if it can’t be applied by “ed” rule
-```
-        documentDirectory.appednPathComponent(“.list”) // mutating
-        // to use "appeded", it needs to be changed like "appended to something", so it needs to be applied by ing-rule
-        let documentFile = documentDirectory.appedingPathComponent(“.list) // non-mutating
-```
+
+ed-rule | ing-rule
+--------|---------
+`x.reverse() // mutating`|`documentDirectory.appendPathComponent(“.list”) // mutating`
+`let y = x.reversed() // non-mutating`|`let documentFile = documentDirectory.appedingPathComponent(“.list) // non-mutating`
+* To use "appeded", it needs to be changed like "appended to something", so it needs to be applied by ing-rule
+
 
 ### Use `#selector` & `#keyPath`
 
@@ -140,38 +136,39 @@
 
 ### Types, properties, variables and constants should read as nouns.
 
-###  About Terms
-     * Avoid obscure terms e.g. “epidermis” is not ad good as “skin”
-     * Use a term of art as it is.
-     * Avoid abbreviations
-     * Embrace precedent. 
-       * ex) Not verticalPositionsOnUnitCircleAtOriginOfEndOfRadiusWithAngle(x) but sin(x) 
+### About Terms
+   * Avoid obscure terms e.g. “epidermis” is not ad good as “skin”
+   * Use a term of art as it is.
+   * Avoid abbreviations
+   * Embrace precedent. 
+    * ex) Not verticalPositionsOnUnitCircleAtOriginOfEndOfRadiusWithAngle(x) but sin(x) 
 
 ### Document complexity for computed property that is not O(1)
 
 ### Names of types and protocols are UpperCamelCase. Everything else is lowerCamelCase. 
-    * But Acronyms that appear all upper case in American English should be up- or down-cased according to case conventions. 
-      * ex) ASCII(American Standard Code for Information Interchange)
-    * Other acronyms should be treated as ordinary words. 
-      * ex) Scuba(Self-Contained Underwater Breathing Apparatus)
+   * But Acronyms that appear all upper case in American English should be up- or down-cased according to case conventions. 
+    * ex) ASCII(American Standard Code for Information Interchange)
+   * Other acronyms should be treated as ordinary words. 
+    * ex) Scuba(Self-Contained Underwater Breathing Apparatus)
 
 ### Take advantage of defaulted parameters.
+
 ```
 func compare(other: String) -> Ordering
 func compare(other: String, options: CompareOptions) -> Odering  
 ```
 
 👉 
+
 `func compare(other: String, options: CompareOptions = []) -> Odering`
 
-
-###  Arguments Labels
-    * Omit all labels when arguments can not be usefully distinguished.
-       * ex) `min(number 1, number 2)`
-     * Full-width type conversion: omit the 1st argument label 
-       * ex) `Int64(someUInt32)`
-     *  narrowing type conversion: describe the narrowing is recommended by label. 
-       * ex) `UInt32(truncating: someUInt64)`
+### Arguments Labels
+   * Omit all labels when arguments can not be usefully distinguished.
+    * ex) `min(number 1, number 2)`
+   * Full-width type conversion: omit the 1st argument label 
+    * ex) `Int64(someUInt32)`
+   * Narrowing type conversion: describe the narrowing is recommended by label. 
+    * ex) `UInt32(truncating: someUInt64)`
 
 ### Label closure parameters and tuple members
 
@@ -222,7 +219,7 @@ func compare(other: String, options: CompareOptions) -> Odering
 ```   
 
 ### C API
-    * Properties
+   * Properties
 ```       
        CFStringRef kCGColorWhite NS_SWIFT_NAME(CGColor.white);
 ```   
@@ -233,7 +230,7 @@ func compare(other: String, options: CompareOptions) -> Odering
        let color = CGColor.white
 ```
 
-    * Initializers
+   * Initializers
 ```
       CGAffineTransform CGAffineTransformMakeTranslation(CGFloat tx, CGFloat ty) NS_SWIFT_NAME(CGAffineTransform.init(translationX:y:));
 ```
@@ -244,7 +241,7 @@ func compare(other: String, options: CompareOptions) -> Odering
       let translate = CGAffineTransform(translationX: 1.0, y: 0.5)
 ```      
 
-    * Methods
+   * Methods
 ```       
        void CGContextFillPath(CGContextRef) NS_SWIFT_NAME(CGContext.fillPaht(self));
 ```
@@ -255,7 +252,7 @@ func compare(other: String, options: CompareOptions) -> Odering
        context.fillPath()
 ```       
 
-    * Computed Properties
+   * Computed Properties
     
 ```
        CFStringRef ArtistGetName(ArtistRef) NS_SWIFT_NAME(getter:Artist.name(self:));
