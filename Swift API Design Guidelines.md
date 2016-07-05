@@ -6,304 +6,248 @@
 
 ## "APIs have to be read grammatically"
 
-# Generics
+### Generics
   A number of frameworks like auto layout and core data support fully general generics
-  
-  { 
-    
-     let request = NSFetchRequest(entityName: "Animal")
-   
-     guard let searchResults = try? context.executeFetchRequest(request) as! [Animal] ...
-  }
-   
-   => 
-   
-  {
-    
-     let request : NSFetchRequest<Animal> = Animal.fetchRequest 
-     guard let searchResults = try? context.fetch(request) ...
-  }
-   
-# Generic constraints are secondary to function signature
+  ```
+  let request = NSFetchRequest(entityName: "Animal")
+  guard let searchResults = try? context.executeFetchRequest(request) as! [Animal] ...
+  ``` 
+   =>
+   ```
+  let request : NSFetchRequest<Animal> = Animal.fetchRequest 
+  guard let searchResults = try? context.fetch(request) ...
+  ```
+### Generic constraints are secondary to function signature
 
-# Warn unused results
-
+### Warn unused results
+ ```
   @discardableResult // The side effect is first. Return value is a secondary thing.
-
   func plusOne (_ a: Int) -> Int {
-
      print(a) // side effect
      return a + 1
-  
   }
   
   plusOne(x) // warning will be occured
-  
   _ = plusOne(x) // In case of just using a side effect
+  ```
   
-# Unsafe pointer can't be nil, use optional
+### Unsafe pointer can't be nil, use optional
   
-# Implicitly Unwrapped Optional
-  - IUO becomes a strong optional if that will work
-  - It is only forced if necessary to type check
+### Implicitly Unwrapped Optional
+  * IUO becomes a strong optional if that will work
+  * It is only forced if necessary to type check
   
-# Floating Point
-  - Provides IEEE-754 properties and operations
-  - FloatigPointProtocol
-    e.g. Not M_PI but Float.pi, CGFloat.pi
+### Floating Point
+  * Provides IEEE-754 properties and operations
+  * FloatigPointProtocol
+    * Not M_PI but Float.pi, CGFloat.pi
 
-# Whole Module Optimization
-  - First compliation will be slow. However it will get faster with caching optimization and compliation
+### Whole Module Optimization
+  * First compliation will be slow. However it will get faster with caching optimization and compliation
 
-# Omit needless words.
-  
-  allViews.removeElement(cancelButton) => allViews.remove(cancelButton)
+### Omit needless words.
+  `allViews.removeElement(cancelButton)`
+  =>  
+  `allViews.remove(cancelButton)`
 
-# Arguments should show an information that is a relationship to the method.
-  
-  emplyess.remove(somePosition) => emplyess.remove(at: somePosition)
-  
-  mainView.addChild(sideBar, atPoint: origin) => mainView.addChild(sideBar, at: origin)
-  
-  - It leads to overload by diffrent type
-  
+### Arguments should show an information that is a relationship to the method.
+  * emplyess.remove(somePosition) => emplyess.remove(at: somePosition)
+  * mainView.addChild(sideBar, atPoint: origin) => mainView.addChild(sideBar, at: origin)
+  * It leads to overload by diffrent type
+```
     friends.remove(ted)
-  
     friends.remove(at: positionOfTed)
+```    
 
-# First argument should read grammatically
-  - Prepositional phrase
-    
-    truck.removeBoxes(withLabel: "WWDC 2016")
-  - To make part of a grammatical phrase
-    
-    viewController.dismiss(true) => viewController.dismiss(animated: true)
-  - Otherwise, don't use a first argument label
+### First argument should read grammatically
+  * Prepositional phrase
+    `truck.removeBoxes(withLabel: "WWDC 2016")`
+  * To make part of a grammatical phrase
+    `viewController.dismiss(true)`
+   =>
+    `viewController.dismiss(animated: true)`
+  * Otherwise, don't use a first argument label
 
-# Name it according to its role.
-  
+### Name it according to its role.
+  ```
    var string = "Hello" => var greeting = "Hello"
   
    func restock(from widgetFactory: WidgetFactory) 
-
+```
    => 
-   
+```   
    func restock(from supplier: WidgetFactory)
+   ```
 
-# NSObject, Any, AnyObject or a fundamental type could give us weak type information.
-   To be clarity, A parameter has such a weak type information should have a noun describing its role.
-  
-   func add(observer: NSObject, for keyPath: String) 
- 
+### NSObject, Any, AnyObject or a fundamental type could give us weak type information. 
+    * To be clarity, A parameter has such a weak type information should have a noun describing its role.
+   `func add(observer: NSObject, for keyPath: String)` 
    => 
+   `func addObserver(_ observer: NSObject, forKeyPath path: String)`
 
-   func addObserver(_ observer: NSObject, forKeyPath path: String)
+### Factory method begins its name with "make"
 
-# Factory method begins its name with "make"
-
-# Initializer and factory method should form a phrase that doesn't include the first argument
-   
-   Color(havingRGBValuesRed: 32...): Color having RGB values red 32 
-
+### Initializer and factory method should form a phrase that doesn't include the first argument
+   `Color(havingRGBValuesRed: 32...)`: Color having RGB values red 32
    => 
-   
-   Color(red: 32...): Colro red 32
-   
-   This rleates to "18.Arguments Labels, Full-width type conversion"
+   `Color(red: 32...)`: Color red 32
+   * This rleates to "18.Arguments Labels, Full-width type conversion"
 
-# Name methods based on their side effects
-   - Functions without side effects or have return value should read as noun phrases
-     
-      x.distance(to: y), i.successor()
-   - But functions with side effects should read as imperative verb pharese
-     
-      friends.reverse()
-   - Mutating, nonmutating
-      
-     Mutating methods have imperative verb forms.
-     
-     Nonmutating methods is applied by “ed”/“ing” rule
+### Name methods based on their side effects
+   * Functions without side effects or have return value should read as noun phrases
+      `x.distance(to: y), i.successor()`
+   * But functions with side effects should read as imperative verb pharese
+      `friends.reverse()`
+   * Mutating, nonmutating
+     * Mutating methods have imperative verb forms.
+     * Nonmutating methods is applied by “ed”/“ing” rule
 
-     
-     “ed” rule
-     
+        *“ed” rule
+     	```
         x.reverse() // mutating
-     
         let y = x.reversed() // non-mutating
-
-     
-     “ing” rule: if it can’t be applied by “ed” rule
-     
+	```
+        * “ing” rule: if it can’t be applied by “ed” rule
+	```
         documentDirectory.appednPathComponent(“.list”) // mutating
-      
-        
         // to use "appeded", it needs to be changed like "appended to something", so it needs to be applied by ing-rule
-        
         let documentFile = documentDirectory.appedingPathComponent(“.list) // non-mutating
+	```
+### Use `#selector` & `#keyPath`
 
-# Use #selector & #keyPath
+### Boolean methods should read as assertions about the receiver
+    `x.isEmpty`
 
-# Boolean methods should read as assertions about the receiver
-    
-    x.isEmpty
+### Protocols describe what something is should read as nouns.
+    `Collection`
 
-# Protocols describe what something is should read as nouns.
-    
-    Collection
+### Protocols describe a capability should be named using the suffixes able, ible or ing.
+    `Equatable, ProgressReporting`
 
-# Protocols describe a capability should be named using the suffixes able, ible or ing.
-    
-    Equatable, ProgressReporting
+### types, properties, variables and constants should read as nouns.
 
-# types, properties, variables and constants should read as nouns.
+###  About Terms
+     * Avoid obscure terms e.g. “epidermis” is not ad good as “skin”
+     * Use a term of art as it is.
+     * Avoid abbreviations
+     * Embrace precedent. e.g. not verticalPositionsOnUnitCircleAtOriginOfEndOfRadiusWithAngle(x) but sin(x) 
 
-#  About Terms
-     - Avoid obscure terms e.g. “epidermis” is not ad good as “skin”
-     - Use a term of art as it is.
-     - Avoid abbreviations
-     - Embrace precedent. e.g. not verticalPositionsOnUnitCircleAtOriginOfEndOfRadiusWithAngle(x) but sin(x) 
+### Document complexity for computed property that is not O(1)
 
-# Document complexity for computed property that is not O(1)
+### Names of types and protocols are UpperCamelCase. Everything els is lowerCamelCase. 
+    * But Acronyms that appear all upper case in American English should be up- or down-cased according to case conventions. 
+      * ex) ASCII(American Standard Code for Information Interchange)
+    * Other acronyms should be treated as ordinary words. 
+      * ex) Scuba(Self-Contained Underwater Breathing Apparatus)
 
-# Names of types and protocols are UpperCamelCase. Everything els is lowerCamelCase. 
-    
-    But Acronyms that appear all upper case in American English should be up- or down-cased according to case conventions. 
-    e.g. ASCII(American Standard Code for Information Interchange)
-     
-    Other acronyms should be treated as ordinary words. 
-
-    e.g. Scuba(Self-Contained Underwater Breathing Apparatus)
-
-# Take advantage of defaulted parameters.
-     
-    e.g. 
-
+### Take advantage of defaulted parameters.
+    	```
          func compare(other: String) -> Ordering
         
          func compare(other: String, options: CompareOptions) -> Odering  
-	
+	```
          => 
-
+	```
          func compare(other: String, options: CompareOptions = []) -> Odering
+         ```
 
-#  Arguments Labels
-       - Omit all labels when arguments can not be usefully distinguished.
-          e.g. min(number 1, number 2)
-       - Full-width type conversion: omit the 1st argument label e.g. Int64(someUInt32)
-         
-         narrowing type conversion: describe the narrowing is recommended by label. e.g. UInt32(truncating: someUInt64)
+###  Arguments Labels
+       * Omit all labels when arguments can not be usefully distinguished.
+         * ex) `min(number 1, number 2)`
+       * Full-width type conversion: omit the 1st argument label 
+         * ex) `Int64(someUInt32)`
+       *  narrowing type conversion: describe the narrowing is recommended by label. 
+          * ex) `UInt32(truncating: someUInt64)`
 
-# Label closure parameters and tuple members
+### Label closure parameters and tuple members
 
-# Take care with unconstrained polymorphism: Any, AnyObject and unconstrained generic parameters
-      
+### Take care with unconstrained polymorphism: Any, AnyObject and unconstrained generic parameters
+    ```    
     var values: [Any] = [1, “a”]
-     
     values.append([2, 3, 4]) // [1, “a”, [2, 3, 4]] or [1, “a”, 2, 3, 4]
-      
-    
-    	struct Array {
-    	
+    ```
+    ```
+    struct Array {
         	/// Inserts ‘newElement’ at ‘self.endIdnex’
     		public mutating func append(newElement: Element)
         
     		/// Inserts the contents of ‘newElements’, in order, at
     		/// ‘self.endIndex’.
     		public mutating func append<S : SequenceType where S.Generator.Element == Element>(contentsOf newElements: S)
-    	} 
-      
-     ——> 
-
-     So, [1, “a”, [2, 3, 4]]
+    } 
+    ```  
+    So, [1, “a”, [2, 3, 4]]
 
 
-## “Renaming”
+### Use `@objc` to convert a Swifty function to an ObjC method
 
-# Use @objc to convert a Swifty function to an ObjC method
-
-# New NS_SWIFT_NAME supports argument labeling
-  
-   - (NSLayoutConstraint *)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor NS_SWIFT_NAME(constraint(equalTo:));
-  
+### New NS_SWIFT_NAME supports argument labeling
+   `- (NSLayoutConstraint *)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor NS_SWIFT_NAME(constraint(equalTo:));`
   => 
-  
-  func constraint(equalTo: NSLayoutAnchor) -> NSLayoutConstraint
+  `func constraint(equalTo: NSLayoutAnchor) -> NSLayoutConstraint`
 
-# NS_EXTENSIBLE_STRING_ENUM
-   
+### NS_EXTENSIBLE_STRING_ENUM
+   ```
    typedef NSString * NSCalendarIdentifier NS_EXTENSIBLE_STRING_ENUM;
    
    NSCalendarIdentifier NSClaendarIdentifierGregorian;
-   
+   ```
    =>
-    
-	   struct NSCalednarIdentifier : RawRepresentable {
-	    	
-		init(_ rawValue: String)
-		var rawValue: String { get }
-		static let gregorian: NSCalendarIdentifier
+    ```
+    struct NSCalednarIdentifier : RawRepresentable {
+	init(_ rawValue: String)
+	var rawValue: String { get }
+	static let gregorian: NSCalendarIdentifier
+    }
+    ```
+   `let cal = NSCalendar(identifier: .gregorian)`
 
-   	   }
-   
-   e.g. let cal = NSCalendar(identifier: .gregorian)
-
-# C API
-    - Properties
-       
-       CFStringRef kCGColorWhite NS_SWIFT_NAME(CGColor.white);
-       
+### C API
+    * Properties
+       `CFStringRef kCGColorWhite NS_SWIFT_NAME(CGColor.white);`
        => 
+       `extension CGColor { static let white: CFString }`
+       `let color = CGColor.white`
 
-       extension CGColor { static let white: CFString }
-
-       e.g. let color = CGColor.white
-
-    - Initializers
-      
-      CGAffineTransform CGAffineTransformMakeTranslation(CGFloat tx, CGFloat ty) NS_SWIFT_NAME(CGAffineTransform.init(translationX:y:));
-      
+    * Initializers
+      `CGAffineTransform CGAffineTransformMakeTranslation(CGFloat tx, CGFloat ty) NS_SWIFT_NAME(CGAffineTransform.init(translationX:y:));`
       => 
-      
-      extension CGAffineTransform { init(translationX: CGFloat, y: CGFloat) }
+      `extension CGAffineTransform { init(translationX: CGFloat, y: CGFloat) }`
 
-      e.g. let translate = CGAffineTransform(translationX: 1.0, y: 0.5)
+      `let translate = CGAffineTransform(translationX: 1.0, y: 0.5)`
 
-    - Methods
-       
-       void CGContextFillPath(CGContextRef) NS_SWIFT_NAME(CGContext.fillPaht(self));
-       
+    * Methods
+       `void CGContextFillPath(CGContextRef) NS_SWIFT_NAME(CGContext.fillPaht(self));`
        => 
-       
-       extension CGContext { func fillPath() }
+       `extension CGContext { func fillPath() }`
 
-       e.g. context.fillPath()
+       `context.fillPath()`
 
-    - Computed Properties
-       
+    * Computed Properties
+    	```
        CFStringRef ArtistGetName(ArtistRef) NS_SWIFT_NAME(getter:Artist.name(self:));
-       
        void ArtistSetName(ArtistRef, CFStringRef) NS_SWIFT_NAME(setter:Artist.name(self:newValue:));
-       
+       ```
        => 
-       
-       extension Artist { var name: CFString { get set } }
+       `extension Artist { var name: CFString { get set } }`
 
-       e.g. let formerName = myArtist.name
-             
-            myArtist.name = “Ƭ̵̬̊” // The Artist Formerly Known as Prince
+	```
+       let formerName = myArtist.name
+        myArtist.name = “Ƭ̵̬̊” // The Artist Formerly Known as Prince
+        ```
 
-# Together
-    
+### Together
+   ```
     typedef NSString * NSCalendarIdentifier NS_EXTENSIBLE_STRING_ENUM NS_SWIFT_NAME(Calendar.Identifier) ;
-    
     NSCalendarIdentifier NSClaendarIdentifierGregorian;
-    
+    ```
     =>
-
-    	struct Calendar.Identifier : RawRepresentable {
-    		init(_ rawValue: String)
-        	var rawValue: String { get }
-        	static let gregorian: Calendar.Identifier
-    	}
+    ```
+    struct Calendar.Identifier : RawRepresentable {
+    	init(_ rawValue: String)
+       	var rawValue: String { get }
+       	static let gregorian: Calendar.Identifier
+    }
+    ```
    
-     e.g. let cal = NSCalendar(identifier: Calendar.Identifier.gregorian)
+    `let cal = NSCalendar(identifier: .gregorian)`
