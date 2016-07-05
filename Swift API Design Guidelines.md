@@ -47,6 +47,7 @@
 
 ### Omit needless words.
   `allViews.removeElement(cancelButton)`
+  
   =>  
   `allViews.remove(cancelButton)`
 
@@ -69,15 +70,14 @@
   * Otherwise, don't use a first argument label
 
 ### Name it according to its role.
-  ```
-   var string = "Hello" => var greeting = "Hello"
-  
-   func restock(from widgetFactory: WidgetFactory) 
-```
+   `var string = "Hello"` 
    => 
-```   
-   func restock(from supplier: WidgetFactory)
-   ```
+   `var greeting = "Hello"`
+  
+  
+   `func restock(from widgetFactory: WidgetFactory) `
+   => 
+   `func restock(from supplier: WidgetFactory)`
 
 ### NSObject, Any, AnyObject or a fundamental type could give us weak type information. 
     * To be clarity, A parameter has such a weak type information should have a noun describing its role.
