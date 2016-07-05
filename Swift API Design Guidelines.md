@@ -62,8 +62,10 @@
 
 ### First argument should read grammatically
   * Prepositional phrase
+  
     `truck.removeBoxes(withLabel: "WWDC 2016")`
   * To make part of a grammatical phrase
+  
     `viewController.dismiss(true)`
    =>
     `viewController.dismiss(animated: true)`
@@ -81,6 +83,7 @@
 
 ### NSObject, Any, AnyObject or a fundamental type could give us weak type information. 
     * To be clarity, A parameter has such a weak type information should have a noun describing its role.
+   
    `func add(observer: NSObject, for keyPath: String)` 
    => 
    `func addObserver(_ observer: NSObject, forKeyPath path: String)`
@@ -95,9 +98,11 @@
 
 ### Name methods based on their side effects
    * Functions without side effects or have return value should read as noun phrases
-      `x.distance(to: y), i.successor()`
+    
+     `x.distance(to: y), i.successor()`
    * But functions with side effects should read as imperative verb pharese
-      `friends.reverse()`
+   
+     `friends.reverse()`
    * Mutating, nonmutating
      * Mutating methods have imperative verb forms.
      * Nonmutating methods is applied by “ed”/“ing” rule
@@ -124,7 +129,7 @@
 ### Protocols describe a capability should be named using the suffixes able, ible or ing.
     `Equatable, ProgressReporting`
 
-### types, properties, variables and constants should read as nouns.
+### Types, properties, variables and constants should read as nouns.
 
 ###  About Terms
      * Avoid obscure terms e.g. “epidermis” is not ad good as “skin”
@@ -141,32 +146,31 @@
       * ex) Scuba(Self-Contained Underwater Breathing Apparatus)
 
 ### Take advantage of defaulted parameters.
-    	```
-         func compare(other: String) -> Ordering
-        
-         func compare(other: String, options: CompareOptions) -> Odering  
-	```
-         => 
-	```
-         func compare(other: String, options: CompareOptions = []) -> Odering
-         ```
+```
+    func compare(other: String) -> Ordering
+    func compare(other: String, options: CompareOptions) -> Odering  
+```
+     => 
+```     
+   func compare(other: String, options: CompareOptions = []) -> Odering
+```   
 
 ###  Arguments Labels
-       * Omit all labels when arguments can not be usefully distinguished.
-         * ex) `min(number 1, number 2)`
-       * Full-width type conversion: omit the 1st argument label 
-         * ex) `Int64(someUInt32)`
-       *  narrowing type conversion: describe the narrowing is recommended by label. 
-          * ex) `UInt32(truncating: someUInt64)`
+    * Omit all labels when arguments can not be usefully distinguished.
+      * ex) `min(number 1, number 2)`
+    * Full-width type conversion: omit the 1st argument label 
+      * ex) `Int64(someUInt32)`
+    *  narrowing type conversion: describe the narrowing is recommended by label. 
+      * ex) `UInt32(truncating: someUInt64)`
 
 ### Label closure parameters and tuple members
 
 ### Take care with unconstrained polymorphism: Any, AnyObject and unconstrained generic parameters
-    ```    
+```    
     var values: [Any] = [1, “a”]
     values.append([2, 3, 4]) // [1, “a”, [2, 3, 4]] or [1, “a”, 2, 3, 4]
-    ```
-    ```
+```
+```
     struct Array {
         	/// Inserts ‘newElement’ at ‘self.endIdnex’
     		public mutating func append(newElement: Element)
@@ -175,79 +179,97 @@
     		/// ‘self.endIndex’.
     		public mutating func append<S : SequenceType where S.Generator.Element == Element>(contentsOf newElements: S)
     } 
-    ```  
+```  
     So, [1, “a”, [2, 3, 4]]
 
 
 ### Use `@objc` to convert a Swifty function to an ObjC method
 
 ### New NS_SWIFT_NAME supports argument labeling
-   `- (NSLayoutConstraint *)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor NS_SWIFT_NAME(constraint(equalTo:));`
-  => 
+```   
+   - (NSLayoutConstraint *)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType> *)anchor NS_SWIFT_NAME(constraint(equalTo:));
+```   
+  =>
   `func constraint(equalTo: NSLayoutAnchor) -> NSLayoutConstraint`
 
+
 ### NS_EXTENSIBLE_STRING_ENUM
-   ```
+   
+```
    typedef NSString * NSCalendarIdentifier NS_EXTENSIBLE_STRING_ENUM;
    
    NSCalendarIdentifier NSClaendarIdentifierGregorian;
-   ```
+```
    =>
-    ```
+```
     struct NSCalednarIdentifier : RawRepresentable {
 	init(_ rawValue: String)
 	var rawValue: String { get }
 	static let gregorian: NSCalendarIdentifier
     }
-    ```
-   `let cal = NSCalendar(identifier: .gregorian)`
+
+   let cal = NSCalendar(identifier: .gregorian)
+```   
 
 ### C API
     * Properties
-       `CFStringRef kCGColorWhite NS_SWIFT_NAME(CGColor.white);`
-       => 
-       `extension CGColor { static let white: CFString }`
-       `let color = CGColor.white`
+```       
+       CFStringRef kCGColorWhite NS_SWIFT_NAME(CGColor.white);
+```       
+```
+       extension CGColor { static let white: CFString }
+        
+       let color = CGColor.white
+```
 
     * Initializers
-      `CGAffineTransform CGAffineTransformMakeTranslation(CGFloat tx, CGFloat ty) NS_SWIFT_NAME(CGAffineTransform.init(translationX:y:));`
-      => 
-      `extension CGAffineTransform { init(translationX: CGFloat, y: CGFloat) }`
+```
+      CGAffineTransform CGAffineTransformMakeTranslation(CGFloat tx, CGFloat ty) NS_SWIFT_NAME(CGAffineTransform.init(translationX:y:));
+```
+```      
+      extension CGAffineTransform { init(translationX: CGFloat, y: CGFloat) }
 
-      `let translate = CGAffineTransform(translationX: 1.0, y: 0.5)`
+      let translate = CGAffineTransform(translationX: 1.0, y: 0.5)
+```      
 
     * Methods
-       `void CGContextFillPath(CGContextRef) NS_SWIFT_NAME(CGContext.fillPaht(self));`
-       => 
-       `extension CGContext { func fillPath() }`
+```       
+       void CGContextFillPath(CGContextRef) NS_SWIFT_NAME(CGContext.fillPaht(self));
+```
+```       
+       extension CGContext { func fillPath() }
 
-       `context.fillPath()`
+       context.fillPath()
+```       
 
     * Computed Properties
-    	```
+    
+```
        CFStringRef ArtistGetName(ArtistRef) NS_SWIFT_NAME(getter:Artist.name(self:));
        void ArtistSetName(ArtistRef, CFStringRef) NS_SWIFT_NAME(setter:Artist.name(self:newValue:));
-       ```
-       => 
-       `extension Artist { var name: CFString { get set } }`
+```
+```
+       extension Artist { var name: CFString { get set } }
+```
 
-	```
+```
        let formerName = myArtist.name
         myArtist.name = “Ƭ̵̬̊” // The Artist Formerly Known as Prince
-        ```
+```
+
 
 ### Together
-   ```
+```
     typedef NSString * NSCalendarIdentifier NS_EXTENSIBLE_STRING_ENUM NS_SWIFT_NAME(Calendar.Identifier) ;
     NSCalendarIdentifier NSClaendarIdentifierGregorian;
-    ```
-    =>
-    ```
+```
+```
     struct Calendar.Identifier : RawRepresentable {
     	init(_ rawValue: String)
        	var rawValue: String { get }
        	static let gregorian: Calendar.Identifier
     }
-    ```
-   
-    `let cal = NSCalendar(identifier: .gregorian)`
+
+
+let cal = NSCalendar(identifier: .gregorian)
+```
