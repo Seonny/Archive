@@ -119,9 +119,7 @@
 ed-rule | ing-rule
 --------|---------
 `x.reverse() // mutating`|`documentDirectory.appendPathComponent(“.list”) // mutating`
-`let y = x.reversed() // non-mutating`|`let documentFile = documentDirectory.appedingPathComponent(“.list) // non-mutating`
-* To use "appeded", it needs to be changed like "appended to something", so it needs to be applied by ing-rule
-
+`let y = x.reversed() // non-mutating`|`let documentFile = documentDirectory.appedingPathComponent(“.list) // non-mutating ,To use "appeded", it needs to be changed like "appended to something", so it needs to be applied by ing-rule`
 
 ### Use `#selector` & `#keyPath`
 
